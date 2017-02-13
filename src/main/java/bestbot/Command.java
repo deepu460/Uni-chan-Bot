@@ -1,9 +1,18 @@
 package bestbot;
 
+/**
+ * The command class links a command keyword to its appropriate action.
+ */
 public class Command {
 
+	/**
+	 * The name of the command
+	 */
 	private String name;
 
+	/**
+	 * The action to be taken whenever this command is invoked
+	 */
 	private Action action;
 
 	public Command(String name, Action action) {

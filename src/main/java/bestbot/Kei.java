@@ -3,7 +3,7 @@ package bestbot;
 import java.util.HashMap;
 import java.util.Map;
 
-import sx.blah.discord.api.EventSubscriber;
+import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
 import sx.blah.discord.handle.obj.IGuild;
@@ -16,6 +16,10 @@ import sx.blah.discord.util.MessageBuilder;
  */
 public class Kei {
 
+	/**
+	 * The list of all citizens managed by Uni. It first maps by server then
+	 * user.
+	 */
 	public static Map<IGuild, Map<IUser, Citizen>> citizens = new HashMap<>();
 
 	@EventSubscriber
@@ -35,6 +39,16 @@ public class Kei {
 				Basilicon.userActions.get(msg.getAuthor()).forEach(a -> a.getAction().act(Uni.client, msg));
 	}
 
+	/**
+	 * Finds the citizen representation of a user within a server. If there is
+	 * none, then one will be made for the user.
+	 * 
+	 * @param user
+	 *            - The user to search for.
+	 * @param guild
+	 *            - The server the user is located in.
+	 * @return A citizen representation of the user within the server.
+	 */
 	public static Citizen retrieveCitizen(IUser user, IGuild guild) {
 		if (!citizens.containsKey(guild))
 			citizens.put(guild, new HashMap<>());
@@ -43,5 +57,5 @@ public class Kei {
 			map.put(user, new Citizen(user, guild));
 		return map.get(user);
 	}
-
+	
 }

@@ -9,9 +9,13 @@ import java.util.Scanner;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.util.DiscordException;
-import sx.blah.discord.util.HTTP429Exception;
 import sx.blah.discord.util.MessageBuilder;
 
+/**
+ * The main runner class that drives the entire program...not much else to say.
+ * 
+ * @author Harsh Ramesh
+ */
 public class Uni {
 
 	public static IDiscordClient client;
@@ -53,7 +57,7 @@ public class Uni {
 	public static void end() {
 		try {
 			client.logout();
-		} catch (HTTP429Exception | DiscordException e) {
+		} catch (DiscordException e) {
 			e.printStackTrace();
 		}
 		s.close();
